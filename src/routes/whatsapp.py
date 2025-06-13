@@ -3,6 +3,7 @@ import requests
 import json
 import logging
 from src.services.llm_service import get_llm_response
+import os # Asegúrate de que esta línea esté al principio del archivo
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
@@ -11,9 +12,10 @@ logger = logging.getLogger(__name__)
 whatsapp_bp = Blueprint('whatsapp', __name__)
 
 # Configuración de WhatsApp Business API
-WHATSAPP_TOKEN = "YOUR_WHATSAPP_ACCESS_TOKEN"  # Debe ser configurado
-WHATSAPP_PHONE_NUMBER_ID = "YOUR_PHONE_NUMBER_ID"  # Debe ser configurado
-VERIFY_TOKEN = "YOUR_VERIFY_TOKEN"  # Token para verificar el webhook
+WHATSAPP_TOKEN = os.getenv("WHATSAPP_ACCESS_TOKEN")
+WHATSAPP_PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUMBER_ID")
+VERIFY_TOKEN = os.getenv("WHATSAPP_VERIFY_TOKEN")
+
 
 @whatsapp_bp.route('/webhook', methods=['GET'])
 def verify_webhook():
