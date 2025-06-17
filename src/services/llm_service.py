@@ -9,6 +9,7 @@ from typing import Optional, Dict, Any
 import requests
 
 logger = logging.getLogger(__name__)
+_llm_service_instance = None # Cambia la instancia global a None
 
 class LLMService:
     """
