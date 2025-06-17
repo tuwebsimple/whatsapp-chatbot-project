@@ -27,6 +27,11 @@ class LLMService:
         self.provider = provider
         self.model_name = model_name
         self.base_url = self._get_base_url()
+
+        # --- AÑADE ESTA LÍNEA --- #
+        logger.info(f"DEBUG LLMService initialized with provider: {self.provider} and model: {self.model_name}")
+        # ------------------------ #
+
          
         if self.provider == "local":
             self.local_llm_instance = LocalLLMService(model_name=self.model_name)
