@@ -201,18 +201,17 @@ Mantén un tono cordial y profesional en todo momento."""
 # Instancia global del servicio LLM
 llm_service = LLMService()
 
-def get_llm_response(message: str, context: Optional[str] = None, 
-                    user_id: Optional[str] = None) -> str:
-    """
-    Función de conveniencia para obtener respuestas del LLM.
-    
-    Args:
-        message: Mensaje del usuario
-        context: Contexto de la conversación
-        user_id: ID del usuario
-        
-    Returns:
-        Respuesta generada
-    """
-    return llm_service.generate_response(message, context, user_id)
+
+def get_llm_response(message: str, user_id: Optional[str] = None) -> str:
+    global _llm_service_instance
+    if _llm_service_instance is None:
+        # Inicializa LLMService solo cuando se llama por primera vez,
+        # asegurando que las variables de entorno ya estén cargadas.
+        _llm_service_instance = LLMService(
+            provider=os.getenv("LLM_PROVIDER", "ollama"), # Provee un default si no está seteado
+            model_name=os.getenv("LLM_MODEL", "mistral:7b") # Provee un default si no está seteado
+        )
+    return _llm_service_instance.generate_response(message, user_id)
+
+
 
