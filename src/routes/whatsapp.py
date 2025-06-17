@@ -1,9 +1,10 @@
+import os # Asegúrate de que esta línea esté al principio del archivo
 from flask import Blueprint, jsonify, request
 import requests
 import json
 import logging
 from src.services.llm_service import get_llm_response
-import os # Asegúrate de que esta línea esté al principio del archivo
+
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)
