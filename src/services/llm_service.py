@@ -2,6 +2,7 @@
 Módulo para la integración con modelos de lenguaje grandes (LLMs).
 Este módulo maneja la comunicación con diferentes LLMs de código abierto.
 """
+import os
 from src.services.local_llm_service import LocalLLMService
 import logging
 import json
